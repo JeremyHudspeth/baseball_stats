@@ -1,13 +1,13 @@
 <?php
 
-// php populate html table from mysql database
+// php populate html table froms mysql database
 
 $hostname = "localhost";
 $username = "root";
 $password = "";
 $dbname = "csv_db";
 $connect = mysqli_connect("localhost", "root", '', "csv_db");
-mysqli_select_db("csv_db");
+mysqli_select_db($connect, "csv_db");
 
 $mysqli_free_result = "SELECT * FROM 'tbl_name'";
 
