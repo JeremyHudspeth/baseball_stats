@@ -1,22 +1,55 @@
 <?php
 
-// php populate html table froms mysql database
+// php populate html table from mysql database
 
 $hostname = "localhost";
 $username = "root";
 $password = "";
 $dbname = "csv_db";
 $connect = mysqli_connect("localhost", "root", '', "csv_db");
-mysqli_select_db($connect, "csv_db");
+$query = "SELECT * FROM tbl_name";
+if ($result = mysqli_query($connect,$query)){
 
-$mysqli_free_result = "SELECT * FROM 'tbl_name'";
+    echo "<table>";
 
-while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
-{
-    printf("Rk: %sName:%s", $row["rk"], $row["name"]);
+    //data
+    while ($row = mysqli_fetch_array($result))  {
+        echo "<tr><td>{$row[0]}</td>";
+        echo "<td>{$row[1]}</td>";
+        echo "<td>{$row[2]}</td>";
+        echo "<td>{$row[3]}</td>";
+        echo "<td>{$row[4]}</td>";
+        echo "<td>{$row[5]}</td>";
+        echo "<td>{$row[6]}</td>";
+        echo "<td>{$row[7]}</td>";
+        echo "<td>{$row[8]}</td>";
+        echo "<td>{$row[9]}</td>";
+        echo "<td>{$row[10]}</td>";
+        echo "<td>{$row[11]}</td>";
+        echo "<td>{$row[12]}</td>";
+        echo "<td>{$row[13]}</td>";
+        echo "<td>{$row[14]}</td>";
+        echo "<td>{$row[15]}</td>";
+        echo "<td>{$row[16]}</td>";
+        echo "<td>{$row[17]}</td>";
+        echo "<td>{$row[18]}</td>";
+        echo "<td>{$row[19]}</td>";
+        echo "<td>{$row[20]}</td>";
+        echo "<td>{$row[21]}</td>";
+        echo "<td>{$row[22]}</td>";
+        echo "<td>{$row[23]}</td>";
+        echo "<td>{$row[24]}</td>";
+        echo "<td>{$row[25]}</td>";
+        echo "<td>{$row[26]}</td>";
+        echo "<td>{$row[27]}</td></tr>";
+    }
+
+    echo "</table>";
 }
 
 mysqli_free_result($result);
+mysqli_close($connect);
+
 
 ?>
 
@@ -45,26 +78,6 @@ mysqli_free_result($result);
 
 <body>
 
-<!-- Table One -->
-<table style="background-color: red;">
-
-    <tr>
-        <th>Rk</th>
-        <th>Pos</th>
-        <th>Name</th>
-        <th>Age</th>
-    </tr>
-
-    <?php while($row = mysqli_fetch_array($result)):;?>
-        <tr>
-            <td><?php echo $row[0];?></td>
-            <td><?php echo $row[1];?></td>
-            <td><?php echo $row[2];?></td>
-            <td><?php echo $row[3];?></td>
-        </tr>
-    <?php endwhile;?>
-
-</table>
 
 
 </body>
