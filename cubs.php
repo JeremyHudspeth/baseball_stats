@@ -5,6 +5,7 @@ $result = mysqli_query($connect, "CREATE DATABASE cubs");
 $db = mysqli_select_db($connect, "cubs");
 define('CSV_PATH', 'C:/xampp/htdocs/baseball-stats/data_files/');
 $csv_file = CSV_PATH . "cubs_2016_stats.csv";
+$drop = "DROP TABLE IF EXISTS Players";
 $sql = "CREATE TABLE Players (
 Rk INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 Pos VARCHAR(50),
@@ -44,7 +45,7 @@ if ($connect->query($sql) === TRUE) {
 
 if (($handle = fopen($csv_file, 'r')) !==FALSE) {
     while (($row = fgetcsv($handle, 1000, ",")) !== FALSE) {
-        $sql = "INSERT INTO `players`(`Rk`,`Pos`,`Name`,`Age`,`G`,`PA`,`AB`,`R`,`H`,`2B`,`3B`,`HR`,`RBI`,`SB`,`CS`,`BB`,`SO`,`BA`,`OBP`,`SLG`,`OPS`,`OPS+`,`TB`,`GDP`,`HBP`,`SH`,`SF`,`IBB`)VALUES(
+        $sql = "INSERT INTO `Players`(`Rk`,`Pos`,`Name`,`Age`,`G`,`PA`,`AB`,`R`,`H`,`2B`,`3B`,`HR`,`RBI`,`SB`,`CS`,`BB`,`SO`,`BA`,`OBP`,`SLG`,`OPS`,`OPS+`,`TB`,`GDP`,`HBP`,`SH`,`SF`,`IBB`)VALUES(
                 '" . $row[0] . "',
                 '" . $row[1] . "',
                 '" . $row[2] . "',
@@ -82,7 +83,7 @@ if (($handle = fopen($csv_file, 'r')) !==FALSE) {
         }}}
 
 
-$select = "SELECT * FROM players";
+$select = "SELECT * FROM Players";
 if ($result = mysqli_query($connect, $select)){
 
     echo "<table>";
