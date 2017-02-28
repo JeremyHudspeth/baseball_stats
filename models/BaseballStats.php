@@ -9,6 +9,7 @@
  */
 class BaseballStats
 {
+
     /**
      * This method should return a nested array containing the stats for all of the cubs players.
      * To clarify if $cubs_team_stats = $baseballStatsModelObject->getTeamStats(), then $cubs_team_stats should be an
@@ -43,5 +44,10 @@ class BaseballStats
     {
         // Implement the code here
         // You may want to use mysqli_fetch_assoc here
-    }
-}
+        $select = "SELECT * FROM Players";
+        if ($result = mysqli_query($connect, $select)){
+
+           while ($row = mysqli_fetch_assoc($result))  {
+                print_r($row);
+            }
+}}}
