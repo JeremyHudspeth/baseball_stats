@@ -76,8 +76,7 @@ if (($handle = fopen("CSV_PATH", "cubs_2016_stats.csv", "r")) !== FALSE) {
         <?php
             
            $baseballStats = new BaseballStats();
-            $query = $baseballStats->prepare("SELECT * FROM Players");
-            $query-> $team_stats_array();
+
 
            $team_stats_array = $baseballStats->getTeamStats($connect);
 
