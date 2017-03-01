@@ -2,10 +2,12 @@
 
 include 'models/BaseballStats.php';
 
-$connect = mysqli_connect("localhost", "root", "");
+$connect = mysqli_connect("localhost", "root", "dellc123");
+
+// When Issue #2 is done, no code between here and END_REMOVE_FOR_2 should be in this file
 $result = mysqli_query($connect, "CREATE DATABASE cubs");
 $db = mysqli_select_db($connect, "cubs");
-define("CSV_PATH", "C:/xampp/htdocs/baseball_stats/data_files/");
+define("CSV_PATH", "./data_files/");
 $csv_file = CSV_PATH . "cubs_2016_stats.csv";
 $trunc = "TRUNCATE TABLE IF EXISTS Players";
 
@@ -49,7 +51,10 @@ if (($handle = fopen("CSV_PATH", "cubs_2016_stats.csv", "r")) !== FALSE) {
             '" . $row[26] . "',
             '" . $row[27] . "')";}}
 
+
+// END_REMOVE_FOR_2
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,25 +72,6 @@ if (($handle = fopen("CSV_PATH", "cubs_2016_stats.csv", "r")) !== FALSE) {
 </head>
 
 <body>
-<<<<<<< HEAD
-<table>
-    <th>Rk</th><th>Pos</th><th>Name</th><th>Age</th><th>G</th><th>PA</th><th>AB</th><th>R</th><th>H</th><th>2B</th><th>3B</th><th>HR</th><th>RBI</th><th>HR</th><th>SB</th><th>CS</th><th>BB</th><th>SO</th><th>BA</th><th>OBP</th><th>SLG</th><th>OPS</th><th>OPS+</th><th>TB</th><th>GDP</th><th>HBP</th><th>SH</th><th>SF</th><th>IBB</th>
-    <?php
-    $baseballStats = new BaseballStats();
-
-    $team_stats_array = $baseballStats->getTeamStats($connect);
-
-    foreach($team_stats_array as $player_data_array) { ?>
-        <tr>
-            <?php foreach($player_data_array as $column => $value) { ?>
-                <td><?php echo $value; ?></td>
-            <?php } ?>
-        </tr>
-    <?php } ?>
-</table>
-</body>
-</html>
-=======
     <table>
         <th>Rk</th><th>Pos</th><th>Name</th><th>Age</th><th>G</th><th>PA</th><th>AB</th><th>R</th><th>H</th><th>2B</th><th>3B</th><th>HR</th><th>RBI</th><th>HR</th><th>SB</th><th>CS</th><th>BB</th><th>SO</th><th>BA</th><th>OBP</th><th>SLG</th><th>OPS</th><th>OPS+</th><th>TB</th><th>GDP</th><th>HBP</th><th>SH</th><th>SF</th><th>IBB</th>
         <?php
@@ -105,4 +91,4 @@ if (($handle = fopen("CSV_PATH", "cubs_2016_stats.csv", "r")) !== FALSE) {
         </table>
     </body>
  </html>
->>>>>>> 1_Modularize_Players_Query
+
