@@ -46,8 +46,10 @@ class BaseballStats
         // You may want to use mysqli_fetch_assoc here
         $select = "SELECT * FROM Players";
         if ($result = mysqli_query($connect, $select)){
+      $cubs_team_stats = array ();
 
            while ($row = mysqli_fetch_assoc($result))  {
-                print_r($row);
-            }
+               ($cubs_team_stats[] = $row);
+
+           }return $cubs_team_stats;
 }}}
