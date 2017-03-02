@@ -46,18 +46,10 @@ $sql = "CREATE TABLE Players (
 `SF` INT(6),
 `IBB` INT(6)); ";
 
-
-
-if ($connect->query($sql) === TRUE){
-    echo "New record created successfully";
-} else {
-    echo "Error" . $sql . "<br>" . $connect->error;
-
-}
 if (($handle = fopen("../data_files/cubs_2016_stats.csv", "r")) !== FALSE) {
     while (($row = fgetcsv($handle, 1000, ",")) !== FALSE) {
 
-        $insert = ("INSERT INTO TABLE Players (`Rk`, `Pos`, `Name`, `Age`, `G`, `PA`, `AB`, `R`, `H`, `2B`, `3B`, `HR`, `RBI`, `SB`, `CS`, `BB`, `SO`, `BA`, `OBP`, `SLG`, `OPS`, `OPS+`, `TB`, `GDP`, `HBP`, `SH`, `SF`, `IBB`) VALUES(
+        $insert = ("INSERT INTO Players (`Rk`, `Pos`, `Name`, `Age`, `G`, `PA`, `AB`, `R`, `H`, `2B`, `3B`, `HR`, `RBI`, `SB`, `CS`, `BB`, `SO`, `BA`, `OBP`, `SLG`, `OPS`, `OPS+`, `TB`, `GDP`, `HBP`, `SH`, `SF`, `IBB`) VALUES(
             " . $row[0] . ",
             " . $row[1] . ",
             " . $row[2] . ",
@@ -88,7 +80,17 @@ if (($handle = fopen("../data_files/cubs_2016_stats.csv", "r")) !== FALSE) {
             " . $row[27] . ")")
         ;
 
-        }}
+    }}
+
+
+
+if ($connect->query($sql) === TRUE){
+    echo "New record created successfully";
+} else {
+    echo "Error" . $sql . "<br>" . $connect->error;
+
+}
+
 
 
 fclose($handle);
