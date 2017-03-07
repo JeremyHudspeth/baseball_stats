@@ -8,7 +8,8 @@
 /**
  * The code to create the Players database table with the data in the cubs_2016_stats.csv file should be move to this file
  */
-$connect = mysqli_connect("localhost", "root", "");
+
+$connect = mysqli_connect("localhost", "root", "Hulksmash87");
 $drop = mysqli_query($connect, "DROP DATABASE cubs");
 $result = mysqli_query($connect, "CREATE DATABASE cubs");
 $db = mysqli_select_db($connect, "cubs");
@@ -44,13 +45,15 @@ $sql = "CREATE TABLE Players (
 `HBP` INT(6),
 `SH` INT(6),
 `SF` INT(6),
-`IBB` INT(6)); ";
+`IBB` INT(6))";
+
+
 
 if (($handle = fopen("../data_files/cubs_2016_stats.csv", "r")) !== FALSE) {
     while (($row = fgetcsv($handle, 1000, ",")) !== FALSE) {
 
         $insert = ("INSERT INTO Players (`Rk`, `Pos`, `Name`, `Age`, `G`, `PA`, `AB`, `R`, `H`, `2B`, `3B`, `HR`, `RBI`, `SB`, `CS`, `BB`, `SO`, `BA`, `OBP`, `SLG`, `OPS`, `OPS+`, `TB`, `GDP`, `HBP`, `SH`, `SF`, `IBB`) VALUES(
-            " . $row[0] . ",
+              " . $row[0] . ",
             " . $row[1] . ",
             " . $row[2] . ",
             " . $row[3] . ",
@@ -82,6 +85,10 @@ if (($handle = fopen("../data_files/cubs_2016_stats.csv", "r")) !== FALSE) {
 
     }}
 
+ $populate = mysqli_query($connect, $insert);
+
+
+
 
 
 if ($connect->query($sql) === TRUE){
@@ -92,7 +99,3 @@ if ($connect->query($sql) === TRUE){
 }
 
 
-
-fclose($handle);
-
-mysqli_close($connect);
