@@ -1,5 +1,5 @@
 <?php
-
+include "../models/jeremydbadapter.php";
 /**
  * Author: Sean Dunagan (github: dunagan5887)
  * Date: 2/28/17
@@ -8,7 +8,7 @@
 /**
  * The code to create the Players database table with the data in the cubs_2016_stats.csv file should be move to this file
  */
-
+$jeremydatabase = new jeremydbadapter();
 $connect = mysqli_connect("localhost", "root", "");
 $drop = mysqli_query($connect, "DROP DATABASE cubs");
 $result = mysqli_query($connect, "CREATE DATABASE cubs");
@@ -53,6 +53,8 @@ if ($connect->query($sql) === TRUE){
 
 }
 
+$table = 'Players';
+$columns = array('Rk','Pos','Name','Age','G','PA','AB','R','H','2B','3B','HR','RBI','SB','CS','BB','SO','BA','OBP','SLG','OPS','OPS+','TB','GDP','HBP','SH','SF','IBB');
 
     if (($handle = fopen("../data_files/cubs_2016_stats.csv", "r")) !== FALSE) {
 
@@ -60,41 +62,10 @@ if ($connect->query($sql) === TRUE){
             $firstEOA = $row[0];
             if ($firstEOA != "Rk"){
 
-                $insert =  ("INSERT INTO Players (`Rk`, `Pos`, `Name`, `Age`, `G`, `PA`, `AB`, `R`, `H`, `2B`, `3B`, `HR`, `RBI`, `SB`, `CS`, `BB`, `SO`, `BA`, `OBP`, `SLG`, `OPS`, `OPS+`, `TB`, `GDP`, `HBP`, `SH`, `SF`, `IBB`) VALUES(
-                    '" . $row[0] . "',
-                    '" . $row[1] . "',
-                    '" . $row[2] . "',
-                    '" . $row[3] . "',
-                    '" . $row[4] . "',
-                    '" . $row[5] . "',
-                    '" . $row[6] . "',
-                    '" . $row[7] . "',
-                    '" . $row[8] . "',
-                    '" . $row[9] . "',
-                    '" . $row[10] . "',
-                    '" . $row[11] . "',
-                    '" . $row[12] . "',
-                    '" . $row[13] . "',
-                    '" . $row[14] . "',
-                    '" . $row[15] . "',
-                    '" . $row[16] . "',
-                    '" . $row[17] . "',
-                    '" . $row[18] . "',
-                    '" . $row[19] . "',
-                    '" . $row[20] . "',
-                    '" . $row[21] . "',
-                    '" . $row[22] . "',
-                    '" . $row[23] . "',
-                    '" . $row[24] . "',
-                    '" . $row[25] . "',
-                    '" . $row[26] . "',
-                    '" . $row[27] . "')")
-                ;
-                if ($connect->query($insert) === TRUE) {
-                    echo "New records inserted successfully";
-                } else {
-                    echo "Error" . $insert . "<br>" . $connect->error;
-                }
+                $jeremydatabase->Insert_array($table, $columns, $row);
+
+
+
             }
         }
     };
